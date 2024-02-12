@@ -1,1 +1,14 @@
-<h1>this is navbar</h1>
+<mat-toolbar color="primary">
+  <a routerLink="/" class="text-decoration-none text-white">
+    <span>Academia</span>
+  </a>
+
+  <span class="example-spacer"></span>
+
+  <a routerLink="/login">
+    <button mat-raised-button class="me-2" color="accent">Login</button></a
+  >
+  <a [routerLink]="'/signup'">
+    <button mat-raised-button color="accent">Register</button>
+  </a>
+</mat-toolbar>
