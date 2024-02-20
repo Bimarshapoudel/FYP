@@ -7,7 +7,7 @@
         </div>
         <h1 class="text-center">Login Here</h1>
 
-        <form action="">
+        <form [formGroup]="loginForm">
           <!-- username field -->
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Username</mat-label>
@@ -15,6 +15,7 @@
             <input
               required
               name="username"
+              formControlName="username"
               matInput
               placeholder="Placeholder"
             />
@@ -26,6 +27,7 @@
             <mat-label>Password</mat-label>
             <input
               required
+              formControlName="password"
               name="password"
               type="password"
               matInput
@@ -33,7 +35,13 @@
             />
           </mat-form-field>
           <div class="container text-center">
-            <button mat-raised-button color="primary" type="submit">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="loginForm.invalid"
+              (click)="login()"
+              type="submit"
+            >
               Login
             </button>
             <button mat-raised-button color="accent" class="ms-2" type="submit">
