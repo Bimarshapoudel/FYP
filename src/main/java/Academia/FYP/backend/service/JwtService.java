@@ -16,26 +16,22 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private final String SECRET_KEY = "4bb6d1dfbafb64a681139d1586b6f1160d18159afd57c8c79136d7490630407c";
-    private final TokenRepository tokenRepository;
 
-    public JwtService(TokenRepository tokenRepository) {
-        this.tokenRepository = tokenRepository;
-    }
+
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
 
+
     public boolean isValid(String token, UserDetails user) {
         String username = extractUsername(token);
 
-        boolean validToken = tokenRepository
-                .findByToken(token)
-                .map(t -> !t.isLoggedOut())
-                .orElse(false);
 
-        return (username.equals(user.getUsername())) && !isTokenExpired(token) && validToken;
+
+        return (username.equals(user.getUsername())) ;
     }
 
     private boolean isTokenExpired(String token) {

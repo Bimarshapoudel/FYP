@@ -1,13 +1,16 @@
 package Academia.FYP.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-
+@Getter
+@Setter
 @Entity
 public class User implements UserDetails {
     @Id
@@ -26,6 +29,11 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    private String email;
+    private String phone;
+    private String profilePic;
+    private boolean enabled=true;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

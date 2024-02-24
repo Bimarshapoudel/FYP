@@ -38,7 +38,7 @@ public class AuthenticationService {
 
         // check if user already exist. if exist than authenticate the user
         if(repository.findByUsername(request.getUsername()).isPresent()) {
-            return new AuthenticationResponse(null, "User already exist");
+            return new AuthenticationResponse( null,"User already exist");
         }
 
         User user = new User();
@@ -65,11 +65,14 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
                         request.getPassword()
+
                 )
         );
 
+
         User user = repository.findByUsername(request.getUsername()).orElseThrow();
         String jwt = jwtService.generateToken(user);
+
 
         revokeAllTokenByUser(user);
         saveUserToken(jwt, user);
