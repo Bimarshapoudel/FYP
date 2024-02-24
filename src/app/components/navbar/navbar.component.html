@@ -5,10 +5,16 @@
 
   <span class="example-spacer"></span>
 
-  <a routerLink="/login">
+  <a routerLink="/login" *ngIf="!login.isLoggedIn()">
     <button mat-raised-button class="me-2" color="accent">Login</button></a
   >
-  <a [routerLink]="'/signup'">
+  <a [routerLink]="'/signup'" *ngIf="!login.isLoggedIn()">
     <button mat-raised-button color="accent">Register</button>
+  </a>
+  <p *ngIf="login.isLoggedIn()" class="me-3 mt-2">
+    {{ login.getUser().username }}
+  </p>
+  <a *ngIf="login.isLoggedIn()">
+    <button (click)="logout()" mat-raised-button color="accent">Logout</button>
   </a>
 </mat-toolbar>

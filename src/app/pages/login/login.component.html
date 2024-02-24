@@ -7,7 +7,7 @@
         </div>
         <h1 class="text-center">Login Here</h1>
 
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" (ngSubmit)="formSubmit()">
           <!-- username field -->
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Username</mat-label>
@@ -39,7 +39,6 @@
               mat-raised-button
               color="primary"
               [disabled]="loginForm.invalid"
-              (click)="login()"
               type="submit"
             >
               Login

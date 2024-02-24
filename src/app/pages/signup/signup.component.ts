@@ -30,6 +30,7 @@ export class SignupComponent {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       firstName: ['', Validators.required],
+      role: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', [Validators.pattern(/^\d{10}$/)]]
     }, { validator: this.passwordMatchValidator })

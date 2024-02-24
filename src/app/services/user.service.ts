@@ -12,6 +12,7 @@ export class UserService {
 
   //add user
   public addUser(user: any): Observable<any> {
-    return this.http.post(`${baseUrl}/register`, user);
+    return this.http.post(`${baseUrl}/user/`, user);
   }
+
 }

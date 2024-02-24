@@ -1,26 +1,84 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule, } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2';
+import { LoginService } from '../../services/login/login.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule, MatCardModule, MatIconModule, ReactiveFormsModule, FormsModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatIconModule, ReactiveFormsModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  JSON: any;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private snack: MatSnackBar, private fb: FormBuilder, private login: LoginService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
+
+  formSubmit() {
+
+    // request to server to generate token
+    this.login.generateToken(this.loginForm.value).subscribe({
+      next: (data: any) => {
+        console.log("success");
+        console.log(data);
+
+        //login...
+        this.login.loginUser(data.token);
+        this.login.getCurrentUser().subscribe({
+          next: (user: any) => {
+            this.login.setUser(user);
+            console.log(user);
+
+            // redirect on basis of role
+            if (this.login.getUserRole() == "ADMIN") {
+              //admin
+              this.router.navigate(['/admin']);
+            }
+            else if (this.login.getUserRole() == "TEACHER") {
+              this.router.navigate(['/teacher']);
+            }
+            else {
+              this.login.logout();
+            }
+          }
+        })
+      },
+      error: (error) => {
+        console.log('error');
+        console.log(error);
+
+      }
+    }
+
+    )
+
+  }
+
+  // login() {
+  //   this.userService.login(this.loginForm.value).subscribe(
+  //     (res) => {
+  //       console.log(res);
+
+  //       if (res != null) {
+  //         Swal.fire('Success', 'User successfully registered', 'success');
+  //       } else {
+  //         alert('error');
+  //       }
+  //     }
+  //   );
+  // }
 }
