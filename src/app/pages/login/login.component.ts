@@ -67,6 +67,9 @@ export class LoginComponent {
     )
 
   }
+  clearForm() {
+    this.loginForm.reset(); // Clear the form manually
+  }
 
   // login() {
   //   this.userService.login(this.loginForm.value).subscribe(

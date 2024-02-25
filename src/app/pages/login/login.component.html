@@ -1,4 +1,120 @@
-<div class="container">
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+  <style>
+    .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+  </style>
+  <div class="container mt-3">
+    <div class="card mb-3">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-4 d-lg-flex">
+          <img
+            src="../../../assets/logo.png"
+            class="rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5 img-fluid"
+            alt="Academia logo"
+          />
+        </div>
+        <div class="col-lg-8">
+          <div class="card-body py-5 px-md-5">
+            <form [formGroup]="loginForm" (ngSubmit)="formSubmit()">
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Username</mat-label>
+
+                  <input
+                    required
+                    name="username"
+                    formControlName="username"
+                    matInput
+                    placeholder="Placeholder"
+                  />
+                  <mat-hint>Valid username</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input
+                    required
+                    formControlName="password"
+                    name="password"
+                    type="password"
+                    matInput
+                    placeholder="Placeholder"
+                  />
+                </mat-form-field>
+              </div>
+
+              <!-- 2 column grid layout for inline styling -->
+              <div class="row mb-4">
+                <!-- <div class="col d-flex justify-content-center">
+               
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="form2Example31"
+                      checked
+                    />
+                    <label class="form-check-label" for="form2Example31">
+                      Remember me
+                    </label>
+                  </div>
+                </div> -->
+
+                <div class="col">
+                  <!-- Simple link -->
+                  <!-- <a href="#!">Forgot password?</a> -->
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <div class="container text-center">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="loginForm.invalid"
+                  type="submit"
+                >
+                  Login
+                </button>
+                <button
+                  mat-raised-button
+                  color="accent"
+                  class="ms-2"
+                  type="submit"
+                  (click)="clearForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
+
+<!--  -->
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <mat-card class="p-2">
@@ -8,7 +124,6 @@
         <h1 class="text-center">Login Here</h1>
 
         <form [formGroup]="loginForm" (ngSubmit)="formSubmit()">
-          <!-- username field -->
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Username</mat-label>
 
@@ -22,7 +137,7 @@
             <mat-hint>Valid username</mat-hint>
           </mat-form-field>
 
-          <!-- password -->
+        
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Password</mat-label>
             <input
@@ -51,4 +166,4 @@
       </mat-card>
     </div>
   </div>
-</div>
+</div> -->

@@ -59,6 +59,7 @@ export class SignupComponent {
         }
 
       })
+
     // if (this.signupForm.username == '' || this.user.username == null) {
     //   // alert('user is required')
     //   this.snack.open('Username is required', '', {
@@ -88,6 +89,7 @@ export class SignupComponent {
     //   }
     // });
   }
-
-
+  clearForm() {
+    this.signupForm.reset(); // Clear the form manually
+  }
 }
