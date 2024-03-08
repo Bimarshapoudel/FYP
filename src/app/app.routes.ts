@@ -4,8 +4,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
-import { adminGuard } from './services/guard/admin.guard';
+
 import { teacherGuardGuard } from './services/guard/TeacherGuard/teacher-guard.guard';
+import { StudentComponent } from './pages/user/student-dashboard/student/student.component';
+import { studentGuard } from './services/guard/StudentGuard/student.guard';
+import { adminGuard } from './services/guard/AdminGuard/admin.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 
 export const routes: Routes = [
     {
@@ -23,12 +28,26 @@ export const routes: Routes = [
     }, {
         path: 'admin',
         component: DashboardComponent,
-        pathMatch: 'full',
-        canActivate: [adminGuard]
+        canActivate: [adminGuard],
+        children: [
+            {
+                path: '',
+                component: WelcomeComponent,
+            },
+            {
+                path: 'profile',
+                component: ProfileComponent,
+            }
+        ]
     }, {
         path: 'teacher',
         component: UserDashboardComponent,
         pathMatch: 'full',
         canActivate: [teacherGuardGuard]
+    }, {
+        path: 'student',
+        component: StudentComponent,
+        pathMatch: 'full',
+        canActivate: [studentGuard]
     }
 ];

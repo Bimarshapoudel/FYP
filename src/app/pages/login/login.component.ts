@@ -44,12 +44,17 @@ export class LoginComponent {
             console.log(user);
 
             // redirect on basis of role
-            if (this.login.getUserRole() == "ADMIN") {
+            if (this.login.getUserRole() === "ADMIN") {
               //admin
-              this.router.navigate(['/admin']);
+              this.router.navigate(['admin']);
             }
-            else if (this.login.getUserRole() == "TEACHER") {
-              this.router.navigate(['/teacher']);
+            else if (this.login.getUserRole() === "TEACHER") {
+              this.router.navigate(['teacher']);
+
+            }
+            else if (this.login.getUserRole() === "STUDENT") {
+              this.router.navigate(['student']);
+
             }
             else {
               this.login.logout();
