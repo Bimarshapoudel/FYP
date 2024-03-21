@@ -44,10 +44,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/generate-token","/login/**","/user/**")
                                 .permitAll()
-                                .requestMatchers("/admin_only/**").hasAuthority("ADMIN")
-                                .requestMatchers("/teacher_only/**")
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                .requestMatchers("/teacher/**")
                                 .hasAuthority("TEACHER")
-                                .requestMatchers("/student_only/**")
+                                .requestMatchers("/student/**")
                                 .hasAuthority("STUDENT")
                                 .anyRequest()
                                 .authenticated()

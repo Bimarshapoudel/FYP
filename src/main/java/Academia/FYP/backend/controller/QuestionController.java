@@ -31,7 +31,7 @@ public class QuestionController {
 //    update the question
     @PutMapping("/")
     public ResponseEntity<Question> update(@RequestBody Question question){
-        return ResponseEntity.ok(this.questionService.addQuestion(question));
+        return ResponseEntity.ok(this.questionService.updateQuestion(question));
     }
 
 // get all question of any quiz

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
@@ -20,7 +22,7 @@ public class QuizController {
     }
 //    update quiz
     @PutMapping("/")
-    public ResponseEntity<Quiz> upadate(@RequestBody Quiz quiz){
+    public ResponseEntity<Quiz> update(@RequestBody Quiz quiz){
         return ResponseEntity.ok(this.quizService.updateQuiz(quiz));
     }
 
