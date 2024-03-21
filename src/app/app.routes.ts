@@ -11,6 +11,8 @@ import { studentGuard } from './services/guard/StudentGuard/student.guard';
 import { adminGuard } from './services/guard/AdminGuard/admin.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,14 @@ export const routes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent,
+            }, {
+                path: 'categories',
+                component: ViewCategoriesComponent
+            },
+            {
+                path: 'add-category',
+                component: AddCategoryComponent
+
             }
         ]
     }, {
