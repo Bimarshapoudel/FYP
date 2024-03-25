@@ -8,6 +8,8 @@ import { MatLineModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule, MatListSubheaderCssMatStyler } from '@angular/material/list';
+import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-quiz-questions',
@@ -20,7 +22,7 @@ export class ViewQuizQuestionsComponent {
   qId: any;
   qTitle: String = '';
   questions = [{
-    quesid: '',
+    quesId: '',
     image: '',
     content: '',
     option1: '',
@@ -34,7 +36,7 @@ export class ViewQuizQuestionsComponent {
   }
   ];
 
-  constructor(private _route: ActivatedRoute, private _question: QuestionService) { }
+  constructor(private _route: ActivatedRoute, private _question: QuestionService, private _snack: MatSnackBar) { }
   ngOnInit(): void {
     this.qId = this._route.snapshot.params['qid'];
     this.qTitle = this._route.snapshot.params['title'];
@@ -49,6 +51,33 @@ export class ViewQuizQuestionsComponent {
     })
 
 
+  }
+
+  // delete Question
+  deleteQuestion(quesid: any) {
+    Swal.fire({
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      title: 'Are you sure, you want to delete this question?'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // confirm
+        this._question.deleteQuestion(quesid).subscribe({
+          next: (data: any) => {
+            this._snack.open('Question Delete', '', {
+              duration: 3000,
+            });
+            this.questions = this.questions.filter((q) => q.quesId != quesid);
+          },
+          error: () => {
+            this._snack.open('Error in Deleting questions', '', {
+              duration: 300
+            });
+          }
+        });
+      }
+    });
   }
 
 }

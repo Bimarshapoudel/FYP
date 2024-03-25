@@ -53,7 +53,7 @@ export class LoginComponent {
 
             }
             else if (this.login.getUserRole() === "STUDENT") {
-              this.router.navigate(['student']);
+              this.router.navigate(['student/0']);
 
             }
             else {
@@ -62,9 +62,9 @@ export class LoginComponent {
           }
         })
       },
-      error: (error) => {
-        console.log('error');
+      error: (error: any) => {
         console.log(error);
+        Swal.fire('error', 'Inavlid username or password', 'error')
 
       }
     }

@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from '../../../services/question.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-add-question',
   standalone: true,
@@ -18,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrl: './add-question.component.css'
 })
 export class AddQuestionComponent {
+
   qId: any;
   qTitle: any;
   question = {

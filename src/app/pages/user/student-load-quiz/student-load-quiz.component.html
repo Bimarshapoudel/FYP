@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h1 class="mt-2">Quizzez</h1>
+
+  <div class="row">
+    @for(q of quizzes;track 1){
+    <div class="col-md-4">
+      <mat-card class="mb-3">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>
+            {{ q.title }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ q.category.title }} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="truncate">{{ q.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">View</button>
+          <button
+            mat-raised-button
+            class="ms-2"
+            [routerLink]="'/student/instructions/' + q.qid"
+            color="accent"
+          >
+            Start
+          </button>
+
+          <button mat-button class="ms-2" color="accent">
+            Questions: {{ q.numberOfQuestions }}
+          </button>
+
+          <button mat-button class="ms-2" color="accent">
+            M.M: {{ q.numberOfQuestions }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    } @empty {
+    <mat-card>
+      <mat-card-content>
+        <h2>No quizzes found</h2>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+</div>

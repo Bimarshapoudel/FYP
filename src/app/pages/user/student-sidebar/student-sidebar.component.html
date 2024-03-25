@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-action-list>
+    <div mat-subheader>Available courses</div>
+    <button mat-list-item mat-list-item routerLink="/student/0">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="home"
+      ></mat-icon>
+      Home
+    </button>
+
+    @for(c of categories;track categories){
+    <button mat-list-item [routerLink]="'/student/' + c.cid">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="quiz"
+      ></mat-icon>
+      {{ c.title }}</button
+    >} @empty {
+    <div>No categories found</div>
+    }
+  </mat-action-list>
+</mat-card>

@@ -18,6 +18,9 @@ import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
 import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
 import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
+import { StudentLoadQuizComponent } from './pages/user/student-load-quiz/student-load-quiz.component';
+import { InstructionsComponent } from './pages/user/instructions/instructions.component';
+import { StartComponent } from './pages/user/start/start.component';
 
 export const routes: Routes = [
     {
@@ -87,7 +90,27 @@ export const routes: Routes = [
     }, {
         path: 'student',
         component: StudentComponent,
-        pathMatch: 'full',
-        canActivate: [studentGuard]
+        canActivate: [studentGuard],
+        children: [{
+            path: ':catid',
+            component: StudentLoadQuizComponent
+        },
+        {
+            path: 'profile',
+            component: ProfileComponent,
+        },
+        {
+            path: 'instructions/:qid',
+            component: InstructionsComponent,
+        }
+            ,
+
+        ]
+        ,
+
+    }, {
+        path: 'start/:qid',
+        component: StartComponent,
+        canActivate: [studentGuard],
     }
 ];
