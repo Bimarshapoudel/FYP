@@ -1,5 +1,6 @@
 package Academia.FYP.backend.service.impl;
 
+import Academia.FYP.backend.model.exam.Category;
 import Academia.FYP.backend.model.exam.Quiz;
 import Academia.FYP.backend.repository.QuizRepository;
 import Academia.FYP.backend.service.QuizService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -38,5 +40,10 @@ public class QuizServiceImpl implements QuizService {
     public void deleteQuiz(Long quizId) {
 
         this.quizRepository.deleteById(quizId);
+    }
+
+    @Override
+    public List<Quiz> getQuizzesofCategory(Category category) {
+        return this.quizRepository.findBycategory(category);
     }
 }

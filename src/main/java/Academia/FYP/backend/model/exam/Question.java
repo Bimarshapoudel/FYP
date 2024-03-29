@@ -1,5 +1,7 @@
 package Academia.FYP.backend.model.exam;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +20,11 @@ public class Question {
     private String Option2;
     private String Option3;
     private String Option4;
-    private String answer;
 
+
+    private String answer;
+    @Transient
+    private String givenAnswer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Quiz quiz;
@@ -36,5 +41,11 @@ public class Question {
         Option4 = option4;
         this.answer = answer;
         this.quiz = quiz;
+    }
+
+    public String getAnswer(){return answer;}
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

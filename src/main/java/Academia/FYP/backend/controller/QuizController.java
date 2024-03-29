@@ -1,5 +1,6 @@
 package Academia.FYP.backend.controller;
 
+import Academia.FYP.backend.model.exam.Category;
 import Academia.FYP.backend.model.exam.Quiz;
 import Academia.FYP.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class QuizController {
         this.quizService.deleteQuiz(qid);
     }
 
+    @GetMapping("category/{cid}")
+    public List<Quiz> getQuizzesofCategory(@PathVariable("cid") Long cid){
+        Category category = new Category();
+        category.setCid(cid);
+        return this.quizService.getQuizzesofCategory(category);
+    }
 
 }

@@ -1,7 +1,10 @@
 package Academia.FYP.backend.service;
 
+import Academia.FYP.backend.model.exam.Category;
 import Academia.FYP.backend.model.exam.Quiz;
+import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Set;
 
 public interface QuizService {
@@ -15,4 +18,6 @@ public interface QuizService {
 
     public void deleteQuiz(Long quizId);
 
+
+   public List<Quiz> getQuizzesofCategory(Category category);
 }
