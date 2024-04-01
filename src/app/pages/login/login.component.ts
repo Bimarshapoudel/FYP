@@ -47,13 +47,17 @@ export class LoginComponent {
             if (this.login.getUserRole() === "ADMIN") {
               //admin
               this.router.navigate(['admin']);
+              this.login.loginStatusSubject.next(true);
+
             }
             else if (this.login.getUserRole() === "TEACHER") {
               this.router.navigate(['teacher']);
+              this.login.loginStatusSubject.next(true);
 
             }
             else if (this.login.getUserRole() === "STUDENT") {
               this.router.navigate(['student/0']);
+              this.login.loginStatusSubject.next(true);
 
             }
             else {

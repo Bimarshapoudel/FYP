@@ -3,6 +3,15 @@
     <div class="col-md-2">
       <!-- ins -->
       <h3>Instruction</h3>
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <ul>
+            <li>Do not refresh the page</li>
+            <li>Do not switch tab</li>
+            <li>Do not minimize the window</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
     </div>
     <div class="col-md-8">
       <!-- questiosn -->
@@ -99,7 +108,9 @@
       <mat-card-actions>
         <!-- actions -->
         <div class="container text-center">
-          <button mat-raised-button color="primary">Print</button>
+          <button (click)="printPage()" mat-raised-button color="primary">
+            Print
+          </button>
           <button
             class="ms-2"
             mat-raised-button
