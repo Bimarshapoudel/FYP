@@ -29,7 +29,7 @@ export class StudentSidebarComponent {
         this.categories = data;
         console.log(this.categories)
       },
-      error: (error: any) => {
+      error: () => {
         Swal.fire('Error', 'Error in loading categoreis', 'error')
       }
     })

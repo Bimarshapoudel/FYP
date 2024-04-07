@@ -9,6 +9,14 @@
       ></mat-icon>
       Home
     </button>
+    <button mat-list-item routerLink="/student/profile">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="account_circle"
+      ></mat-icon>
+      Profile
+    </button>
 
     @for(c of categories;track categories){
     <button mat-list-item [routerLink]="'/student/' + c.cid">

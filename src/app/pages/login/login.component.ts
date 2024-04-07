@@ -67,9 +67,9 @@ export class LoginComponent {
         })
       },
       error: (error: any) => {
-        console.log(error);
-        Swal.fire('error', 'Inavlid username or password', 'error')
+        console.error(error);
 
+        Swal.fire('Error', "Invalid username or password", 'error');
       }
     }
 

@@ -50,7 +50,7 @@ export class StudentLoadQuizComponent {
           this._quiz.getQuizzesOfCategory(this.catId).subscribe({
             next: (data: any) => {
               this.quizzes = data;
-            }, error: (error) => {
+            }, error: () => {
               alert("Error in loading quiz data")
             }
           })

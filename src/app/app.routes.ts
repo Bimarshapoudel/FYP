@@ -21,6 +21,10 @@ import { AddQuestionComponent } from './pages/admin/add-question/add-question.co
 import { StudentLoadQuizComponent } from './pages/user/student-load-quiz/student-load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { StartComponent } from './pages/user/start/start.component';
+import { AddStudyMaterialComponent } from './pages/admin/add-study-material/add-study-material.component';
+import { AddLessonComponent } from './pages/admin/add-lesson/add-lesson.component';
+import { ViewLessonComponent } from './pages/admin/view-lesson/view-lesson.component';
+import { UpdateLessonComponent } from './pages/admin/update-lesson/update-lesson.component';
 
 export const routes: Routes = [
     {
@@ -64,8 +68,20 @@ export const routes: Routes = [
             }
             ,
             {
+                path: 'lessons',
+                component: ViewLessonComponent
+
+            }
+            ,
+            {
                 path: 'add-quiz',
                 component: AddQuizComponent
+
+            }
+            ,
+            {
+                path: 'add-lesson',
+                component: AddLessonComponent
 
             }
             ,
@@ -73,13 +89,18 @@ export const routes: Routes = [
                 path: 'quiz/:qid',
                 component: UpdateQuizComponent
 
+            },
+            {
+                path: 'lesson/:lid',
+                component: UpdateLessonComponent
+
             }, {
                 path: 'view-questions/:qid/:title',
                 component: ViewQuizQuestionsComponent
             }
             , {
-                path: 'add-question/:qid/:title',
-                component: AddQuestionComponent
+                path: 'add-studyMaterial',
+                component: AddStudyMaterialComponent
             }
         ]
     }, {
@@ -91,19 +112,24 @@ export const routes: Routes = [
         path: 'student',
         component: StudentComponent,
         canActivate: [studentGuard],
-        children: [{
-            path: ':catid',
-            component: StudentLoadQuizComponent
-        },
-        {
-            path: 'profile',
-            component: ProfileComponent,
-        },
-        {
-            path: 'instructions/:qid',
-            component: InstructionsComponent,
-        }
-            ,
+        children: [
+            {
+                path: 'profile',
+                pathMatch: 'full',
+                component: ProfileComponent,
+
+            },
+            {
+                path: ':catid',
+                component: StudentLoadQuizComponent
+            },
+
+
+            {
+                path: 'instructions/:qid',
+                component: InstructionsComponent,
+            }
+
 
         ]
         ,
@@ -112,5 +138,10 @@ export const routes: Routes = [
         path: 'start/:qid',
         component: StartComponent,
         canActivate: [studentGuard],
-    }
+    }, {
+        path: 'profile',
+        pathMatch: 'full',
+        component: ProfileComponent,
+
+    },
 ];

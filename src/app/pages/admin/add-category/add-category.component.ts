@@ -40,7 +40,7 @@ export class AddCategoryComponent {
       },
       error: (error: any) => {
         console.log(error)
-        Swal.fire("Success !!", 'Server eeroe', 'error')
+        Swal.fire("Error", 'Server erroe', 'error')
       }
     })
   }

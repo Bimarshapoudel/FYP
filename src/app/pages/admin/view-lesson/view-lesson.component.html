@@ -1,0 +1,45 @@
+@for(l of lessons;track lessons ){
+<mat-card class="p-2 mt-2 ms-2 me-2">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ l.title }}</mat-card-title>
+    <mat-card-subtitle>{{ l.category.title }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ l.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="'/admin/view-lesson/' + l.lid + '/' + l.title"
+    >
+      Study Material
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="'/admin/lesson/' + l.lid"
+      class="ms-2"
+    >
+      Update
+    </button>
+    <button
+      mat-flat-button
+      color="warn"
+      class="ms-2"
+      (click)="deleteQuiz(l.lid)"
+    >
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>
+}@empty {
+<div>No Lessons found</div>
+}
+<div class="container text-center mt-3">
+  <button routerLink="/admin/add-lesson" mat-raised-button color="primary">
+    Add New Lesson
+  </button>
+</div>
