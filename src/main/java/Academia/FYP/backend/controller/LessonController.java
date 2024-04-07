@@ -30,7 +30,7 @@ public class LessonController {
     }
 
 //    get single lesson
-    @GetMapping("/{lid)")
+    @GetMapping("/{lid}")
     public  Lesson lesson(@PathVariable("lid") Long lid){
        return this.lessonService.getLesson(lid);
     }

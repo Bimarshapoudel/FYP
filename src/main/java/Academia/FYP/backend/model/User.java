@@ -1,5 +1,6 @@
 package Academia.FYP.backend.model;
 
+import Academia.FYP.backend.model.exam.Enrollment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -34,6 +38,9 @@ public class User implements UserDetails {
     private String phone;
     private String profilePic;
     private boolean enabled=true;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Enrollment> enrollments = new HashSet<>();
+
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
