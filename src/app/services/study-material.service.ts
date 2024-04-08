@@ -9,10 +9,14 @@ export class StudyMaterialService {
 
   constructor(private _http: HttpClient) { }
 
-  public postStudyMaterial(study: any) {
+  public postStudyMaterial(file: File, lessonId: number, description: string) {
     let formData = new FormData();
-    formData.append("file", study.file)
-    formData.append("studyMaterial", JSON.stringify(study))
-    return this._http.post(`${baseUrl}/study/`, formData)
+    formData.append("file", file)
+    formData.append('lessonId', lessonId.toString());
+    formData.append('description', description);
+    return this._http.post(`${baseUrl}/study/upload`, formData)
+  }
+  public getStudyMaterialofLesson(lid: number) {
+    return this._http.get(`${baseUrl}/study/lesson/${lid}`)
   }
 }

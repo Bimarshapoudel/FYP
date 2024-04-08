@@ -1,17 +1,16 @@
 <mat-card>
-  {{ Studymaterial | json }}
   <div class="container">
     <form action="">
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Title</mat-label>
+        <mat-label>Lesson id</mat-label>
         <input
           required
           autofocus
           type="text"
           name="title"
           matInput
-          placeholder="Enter Title"
-          [(ngModel)]="Studymaterial.title"
+          placeholder="Enter LEsson Id"
+          [(ngModel)]="lessonId"
         />
       </mat-form-field>
       <mat-form-field class="w-100" appearance="outline">
@@ -23,16 +22,18 @@
           name="description"
           matInput
           placeholder="Enter Description"
-          [(ngModel)]="Studymaterial.description"
+          [(ngModel)]="description"
         />
       </mat-form-field>
 
       <input
         (change)="onChangeFileField($event)"
+        accept=".pdf,.doc,.docx"
         class="mb-2 form-control"
         name="studyFile"
         type="file"
       />
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
       <div class="container text-center mt-3 mb-4">
         <button mat-raised-button color="primary" (click)="formsubmit()">
           ADD

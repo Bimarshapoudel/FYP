@@ -25,6 +25,7 @@ import { AddStudyMaterialComponent } from './pages/admin/add-study-material/add-
 import { AddLessonComponent } from './pages/admin/add-lesson/add-lesson.component';
 import { ViewLessonComponent } from './pages/admin/view-lesson/view-lesson.component';
 import { UpdateLessonComponent } from './pages/admin/update-lesson/update-lesson.component';
+import { ViewStudyMaterialComponent } from './pages/admin/view-study-material/view-study-material.component';
 
 export const routes: Routes = [
     {
@@ -97,6 +98,9 @@ export const routes: Routes = [
             }, {
                 path: 'view-questions/:qid/:title',
                 component: ViewQuizQuestionsComponent
+            }, {
+                path: 'view-studyMaterial/:lid/:title',
+                component: ViewStudyMaterialComponent
             }
             , {
                 path: 'add-studyMaterial',
