@@ -1,14 +1,17 @@
 package Academia.FYP.backend.service;
 
 import Academia.FYP.backend.model.AuthenticationResponse;
+import Academia.FYP.backend.model.JwtRequest;
 import Academia.FYP.backend.model.Token;
 import Academia.FYP.backend.model.User;
 import Academia.FYP.backend.repository.TokenRepository;
 import Academia.FYP.backend.repository.UserRepository;
+import Academia.FYP.backend.service.impl.UserServiceImpl;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ public class AuthenticationService {
 private  final TokenRepository tokenRepository;
 
 private  final EmailService emailService;
+private final UserServiceImpl userService;
 
 
     private final AuthenticationManager authenticationManager;
@@ -34,12 +38,13 @@ private  final EmailService emailService;
                                  PasswordEncoder passwordEncoder,
                                  JwtService jwtService,
 
-                                 TokenRepository tokenRepository, EmailService emailService, AuthenticationManager authenticationManager) {
+                                 TokenRepository tokenRepository, EmailService emailService,  UserServiceImpl userService, AuthenticationManager authenticationManager) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
+        this.userService = userService;
 
         this.authenticationManager = authenticationManager;
     }
@@ -101,7 +106,7 @@ private  final EmailService emailService;
         return codeBuilder.toString();
     }
 
-    public AuthenticationResponse authenticate(User request) {
+    public AuthenticationResponse authenticate(JwtRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -118,6 +123,27 @@ private  final EmailService emailService;
 
         return new AuthenticationResponse(jwt, "User login was successful");
 
+    }
+    public void activateAccount(String token) throws MessagingException {
+        Token savedToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
+
+        // Check if the token has expired
+        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
+            // Token has expired, send a new validation email
+            userService.sendValidationEmail(savedToken.getUser());
+            throw new RuntimeException("Activation token has expired. A new token has been sent.");
+        }
+
+        // Activate the user account
+        User user = repository.findById(savedToken.getUser().getId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setEnabled(true);
+        repository.save(user);
+
+        // Update the validation timestamp of the token
+        savedToken.setValidateAt(LocalDateTime.now());
+        tokenRepository.save(savedToken);
     }
 
 }

@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void sendValidationEmail(User user) throws MessagingException {
+    public void sendValidationEmail(User user) throws MessagingException {
         var newToken=generateAndSaveActivationToken(user);
         emailService.sendEmail(user.getEmail(), user.fullName(), EmailTemplateName.ACTIVATE_ACCOUNT,
                 activationUrl,newToken,"Account Activation");
