@@ -41,8 +41,11 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String phone;
-    private String profilePic;
+    @Lob
+    @Column(length = 1000000)
+    private byte[] profilePic;
     private boolean accountLocked;
+    private boolean enabled;
 
     public String fullName(){return firstName+" "+lastName;}
 
@@ -53,10 +56,11 @@ public class User implements UserDetails {
 //    @LastModifiedDate
 //    @Column(insertable = false,updatable = true)
 //    private LocalDateTime lastModifiedDate;
-    private boolean enabled;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Enrollment> enrollments = new HashSet<>();
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Token> token = new HashSet<>();
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -108,7 +112,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     public void setUsername(String username) {

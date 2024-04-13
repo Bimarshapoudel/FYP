@@ -10,6 +10,7 @@ import Academia.FYP.backend.service.JwtService;
 import Academia.FYP.backend.service.UserDetailsServiceImp;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,7 +38,13 @@ public class AuthenticationController {
 
     @PostMapping("generate-token")
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-return ResponseEntity.ok(service.authenticate(jwtRequest));
+        try {
+            String token = service.authenticate(jwtRequest);
+            return ResponseEntity.ok(new JwtResponse(token));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid username or password");
+        }
         //
 //
 //        try{

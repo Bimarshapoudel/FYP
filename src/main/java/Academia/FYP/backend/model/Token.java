@@ -21,7 +21,7 @@ public class Token {
     private LocalDateTime expiresAt;
 
     private LocalDateTime validateAt;
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name="userId",nullable = false)
     private User user;
 

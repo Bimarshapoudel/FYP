@@ -10,11 +10,13 @@ import Academia.FYP.backend.service.impl.UserServiceImpl;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 
@@ -106,24 +108,24 @@ private final UserServiceImpl userService;
         return codeBuilder.toString();
     }
 
-    public AuthenticationResponse authenticate(JwtRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
+    public String authenticate(JwtRequest request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(),
+                            request.getPassword()
+                    )
+            );
 
-                )
-        );
+            User user = repository.findByUsername(request.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-
-        User user = repository.findByUsername(request.getUsername()).orElseThrow();
-        String jwt = jwtService.generateToken(user);
-
-
-
-        return new AuthenticationResponse(jwt, "User login was successful");
-
+            return jwtService.generateToken(user);
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException("Invalid username or password", e);
+        }
     }
+
     public void activateAccount(String token) throws MessagingException {
         Token savedToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
