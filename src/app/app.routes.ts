@@ -26,6 +26,11 @@ import { AddLessonComponent } from './pages/admin/add-lesson/add-lesson.componen
 import { ViewLessonComponent } from './pages/admin/view-lesson/view-lesson.component';
 import { UpdateLessonComponent } from './pages/admin/update-lesson/update-lesson.component';
 import { ViewStudyMaterialComponent } from './pages/admin/view-study-material/view-study-material.component';
+import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
+import { StudentWelcomeComponentComponent } from './pages/user/student-welcome-component/student-welcome-component.component';
+import { ViewStudentsComponent } from './pages/admin/view-students/view-students.component';
+import { TeacherWelcomeComponent } from './pages/user/teacher-welcome/teacher-welcome.component';
+import { TeacherViewQuizComponent } from './pages/user/teacher-view-quiz/teacher-view-quiz.component';
 
 export const routes: Routes = [
     {
@@ -90,6 +95,9 @@ export const routes: Routes = [
                 path: 'quiz/:qid',
                 component: UpdateQuizComponent
 
+            }, {
+                path: 'add-question/:qId/:qTitle',
+                component: AddQuestionComponent
             },
             {
                 path: 'lesson/:lid',
@@ -103,23 +111,44 @@ export const routes: Routes = [
                 component: ViewStudyMaterialComponent
             }
             , {
-                path: 'add-studyMaterial',
+                path: 'add-studyMaterial/:lid',
                 component: AddStudyMaterialComponent
+            }, {
+                path: 'students',
+                component: ViewStudentsComponent,
             }
         ]
-    }, {
+    },
+    {
         path: 'teacher',
         component: UserDashboardComponent,
         pathMatch: 'full',
-        canActivate: [teacherGuardGuard]
-    }, {
+        canActivate: [teacherGuardGuard],
+        children: [
+            {
+                path: '',
+                component: TeacherWelcomeComponent
+
+            }, {
+
+                path: 'profile',
+
+                component: ProfileComponent
+            }, {
+                path: 'quiz/:catid',
+                component: TeacherViewQuizComponent
+            }]
+
+
+    },
+    {
         path: 'student',
         component: StudentComponent,
         canActivate: [studentGuard],
         children: [
             {
                 path: 'profile',
-                pathMatch: 'full',
+
                 component: ProfileComponent,
 
             },
@@ -132,6 +161,9 @@ export const routes: Routes = [
             {
                 path: 'instructions/:qid',
                 component: InstructionsComponent,
+            }, {
+                path: '',
+                component: StudentWelcomeComponentComponent
             }
 
 
@@ -148,4 +180,8 @@ export const routes: Routes = [
         component: ProfileComponent,
 
     },
+    {
+        path: 'activate-account',
+        component: ConfirmEmailComponent
+    }
 ];

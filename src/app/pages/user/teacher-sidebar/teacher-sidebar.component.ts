@@ -1,21 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import { CategoryService } from '../../../services/category.service';
+import { RouterModule, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../../services/category.service';
 import { LoginService } from '../../../services/login/login.service';
 
 @Component({
-  selector: 'app-student-sidebar',
+  selector: 'app-teacher-sidebar',
   standalone: true,
   imports: [RouterModule, CommonModule, MatListModule, MatCardModule, MatIcon, MatIconModule, RouterLink],
-  templateUrl: './student-sidebar.component.html',
-  styleUrl: './student-sidebar.component.css'
+  templateUrl: './teacher-sidebar.component.html',
+  styleUrl: './teacher-sidebar.component.css'
 })
-export class StudentSidebarComponent {
+export class TeacherSidebarComponent {
   categories = [{
     cid: '',
     title: '',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from '../helper';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class LoginService {
 
   // generate token
 
-  public generateToken(loginData: any) {
+  public generateToken(loginData: any): Observable<any> {
 
     return this.http.post(`${baseUrl}/generate-token`, loginData);
   }
@@ -71,6 +71,10 @@ export class LoginService {
       this.logout();
       return null;
     }
+  }
+  getUserId(): number | null {
+    let user = this.getUser();
+    return user.id;
   }
 
   //get user role

@@ -8,11 +8,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, MatButtonModule, FormsModule, MatSnackBarModule, MatCardModule,
+  imports: [CommonModule, MatSelectModule, MatRadioModule, MatInputModule, MatFormFieldModule, MatButtonModule, FormsModule, MatSnackBarModule, MatCardModule,
     ReactiveFormsModule, FormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
@@ -30,6 +32,8 @@ export class SignupComponent {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       firstName: ['', Validators.required],
+      email: ['', Validators.required],
+      profilePic: ['', Validators.required],
       role: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', [Validators.pattern(/^\d{10}$/)]]

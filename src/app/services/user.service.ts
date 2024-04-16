@@ -15,4 +15,9 @@ export class UserService {
     return this.http.post(`${baseUrl}/user/`, user);
   }
 
+  public activateAccount(token: string): Observable<any> {
+    const url = `${baseUrl}/activate-account?token=${token}`;
+    return this.http.get(url);
+  }
+
 }

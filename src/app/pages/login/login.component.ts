@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ErrorHandler } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,11 +28,12 @@ export class LoginComponent {
     });
   }
 
+
   formSubmit() {
 
     // request to server to generate token
     this.login.generateToken(this.loginForm.value).subscribe({
-      next: (data: any) => {
+      next: data => {
         console.log("success");
         console.log(data);
 
@@ -42,6 +43,7 @@ export class LoginComponent {
           next: (user: any) => {
             this.login.setUser(user);
             console.log(user);
+
 
             // redirect on basis of role
             if (this.login.getUserRole() === "ADMIN") {
@@ -56,13 +58,17 @@ export class LoginComponent {
 
             }
             else if (this.login.getUserRole() === "STUDENT") {
-              this.router.navigate(['student/0']);
+              this.router.navigate(['student']);
               this.login.loginStatusSubject.next(true);
 
             }
             else {
               this.login.logout();
             }
+          }, error: error => {
+            console.error(error, 'sddsc');
+
+            Swal.fire('Error', "Invalid username or password", 'error');
           }
         })
       },

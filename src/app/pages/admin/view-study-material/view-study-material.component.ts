@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule, MatListSubheaderCssMatStyler } from '@angular/material/list';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudyMaterialService } from '../../../services/study-material.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-study-material',
@@ -43,5 +44,27 @@ export class ViewStudyMaterialComponent {
         console.log(error)
       }
     })
+  }
+  deleteStudy(sid: any) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Are you sure?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete
+        this._study.DeleteStudyMaerial(sid).subscribe({
+          next: (data: any) => {
+
+            this.studyMaterial = this.studyMaterial.filter((studyMaterial) => studyMaterial.id != sid)
+            Swal.fire('Success', 'Study Material deleted', 'success');
+          }, error(error: any) {
+            Swal.fire('Error', 'Error in deleting Quiz', 'error');
+          }
+        });
+      }
+    })
+
   }
 }

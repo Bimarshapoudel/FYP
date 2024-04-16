@@ -4,11 +4,22 @@
   <mat-card-content>
     <div class="container">
       <div class="conatiner text-center">
-        <img
-          src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
-          alt=""
-          class="profile-image"
-        />
+        <ng-container *ngIf="user.profilePic">
+          <!-- Display user's profile pic -->
+          <img
+            [src]="user.profilePic"
+            alt="Profile Picture"
+            class="profile-image"
+          />
+        </ng-container>
+        <!-- If user profilePic is empty or undefined, display a placeholder image -->
+        <ng-container *ngIf="!user.profilePic">
+          <img
+            src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
+            alt="Placeholder"
+            class="profile-image"
+          />
+        </ng-container>
         <h1 class="mt-2 fw-bold">{{ user.firstName }} {{ user.lastName }}</h1>
       </div>
       <div class="row">

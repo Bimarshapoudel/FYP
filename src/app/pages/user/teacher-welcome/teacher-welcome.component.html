@@ -1,0 +1,27 @@
+<mat-card>
+  <h1>All Course</h1>
+  <mat-list>
+    @for(c of categories;track 1 ){
+    <mat-list-item class="">
+      <div mat-line class="mt-2">
+        <mat-icon mat-list-icon>Course</mat-icon>{{ c.title }}
+        <div class="mb-2" mat-line>{{ c.description }}</div>
+      </div>
+    </mat-list-item>
+
+    <button mat-raised-button class="mt-2 ms-2" [routerLink]="'quiz/' + c.cid">
+      Quizzes
+    </button>
+    <button
+      mat-raised-button
+      class="mt-2 ms-2"
+      [routerLink]="'/teacher/quiz/' + c.cid"
+    >
+      Lesson
+    </button>
+    }@empty {
+    <div>No receips found</div>
+
+    }
+  </mat-list>
+</mat-card>

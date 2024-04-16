@@ -10,6 +10,7 @@
           />
         </div>
         <h1 class="text-center">Register Here</h1>
+
         <form [formGroup]="signupForm">
           <!-- username field -->
           <mat-form-field class="w-100" appearance="outline">
@@ -73,14 +74,32 @@
             />
           </mat-form-field>
           <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Role</mat-label>
+            <mat-label>Email</mat-label>
             <input
               required
-              formControlName="role"
-              name="lastName"
+              formControlName="email"
+              name="email"
               matInput
               placeholder="Placeholder"
             />
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Profile Pic URL</mat-label>
+            <input
+              required
+              formControlName="profilePic"
+              name="profilePic"
+              matInput
+              placeholder="Enter Image Url"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" placeholder="Select Role">
+              <mat-option value="STUDENT">Student</mat-option>
+              <mat-option value="TEACHER">Teacher</mat-option>
+              <mat-option value="ADMIN">Admin</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <!-- email -->

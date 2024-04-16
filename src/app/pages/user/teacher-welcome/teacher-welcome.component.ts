@@ -1,21 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { MatLineModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule, MatListSubheaderCssMatStyler } from '@angular/material/list';
+import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category.service';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
 import { LoginService } from '../../../services/login/login.service';
 
 @Component({
-  selector: 'app-student-sidebar',
+  selector: 'app-teacher-welcome',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatListModule, MatCardModule, MatIcon, MatIconModule, RouterLink],
-  templateUrl: './student-sidebar.component.html',
-  styleUrl: './student-sidebar.component.css'
+  imports: [RouterLink, CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatListSubheaderCssMatStyler, MatLineModule],
+  templateUrl: './teacher-welcome.component.html',
+  styleUrl: './teacher-welcome.component.css'
 })
-export class StudentSidebarComponent {
+export class TeacherWelcomeComponent {
   categories = [{
     cid: '',
     title: '',

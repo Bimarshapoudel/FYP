@@ -6,18 +6,20 @@ import { MatCard } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { StudyMaterialService } from '../../../services/study-material.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-add-study-material',
   standalone: true,
-  imports: [CommonModule, MatInputModule, MatCard, FormsModule, MatFormFieldModule, MatButtonModule],
+  imports: [RouterLink, CommonModule, MatInputModule, MatCard, FormsModule, MatFormFieldModule, MatButtonModule],
   templateUrl: './add-study-material.component.html',
   styleUrl: './add-study-material.component.css'
 })
 export class AddStudyMaterialComponent {
 
-  constructor(private _study: StudyMaterialService) { }
+  constructor(private _study: StudyMaterialService, private _ar: ActivatedRoute) { }
   fileToUpload: File | null = null;
-  lessonId: number | null = null;
+  lessonId = this._ar.snapshot.params['lid'];
   description: string = '';
   errorMessage: string = '';
 
@@ -30,9 +32,12 @@ export class AddStudyMaterialComponent {
     this._study.postStudyMaterial(this.fileToUpload, this.lessonId, this.description).subscribe({
       next: (data: any) => {
         console.log(data)
+        Swal.fire('Success', 'Study Material is added successfully', 'success');
+        this.description = '';
+        this.fileToUpload = null;
       }, error: (error: any) => {
         console.log(error)
-        alert("error")
+        this.errorMessage = 'Please select a different file, lesson ID, and description';
       },
       complete: () => {
         console.log("Request Completed")
