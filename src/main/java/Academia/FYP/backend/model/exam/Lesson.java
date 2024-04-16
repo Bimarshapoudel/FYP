@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -18,4 +21,6 @@ public class Lesson {
     private String title;
    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
+    @OneToMany(cascade = CascadeType.ALL)
+   private Set<StudyMaterial> studyMaterialSetter=new HashSet<>();
 }

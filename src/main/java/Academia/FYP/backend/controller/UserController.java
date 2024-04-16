@@ -1,5 +1,6 @@
 package Academia.FYP.backend.controller;
 
+import Academia.FYP.backend.model.Role;
 import Academia.FYP.backend.model.User;
 import Academia.FYP.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,5 +38,13 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/teachers")
+    public List<User> getAllTeachers() {
+        return userService.getTeacher(Role.TEACHER);
+    }
+    @GetMapping("/students")
+    public List<User> getAllStudents() {
+        return userService.getStudent(Role.STUDENT);
     }
 }

@@ -1,5 +1,6 @@
 package Academia.FYP.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Token {
 
     private LocalDateTime validateAt;
     @ManyToOne( cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name="userId",nullable = false)
     private User user;
 

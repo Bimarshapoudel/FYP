@@ -1,5 +1,6 @@
 package Academia.FYP.backend.service.impl;
 
+import Academia.FYP.backend.model.Role;
 import Academia.FYP.backend.model.Token;
 import Academia.FYP.backend.model.User;
 import Academia.FYP.backend.repository.TokenRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +50,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(request.getLastName());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setProfilePic(request.getProfilePic());
         user.setEmail(request.getEmail());
         user.setPhone(request.getPhone());
         user.setRole(request.getRole());
@@ -142,6 +145,12 @@ public class UserServiceImpl implements UserService {
             codeBuilder.append(characters.charAt(randomIndex));
         }
         return codeBuilder.toString();
+    }
+    public List<User> getTeacher(Role role){
+        return userRepository.findByRole(Role.TEACHER);
+    }
+    public List<User> getStudent(Role role){
+        return userRepository.findByRole(Role.STUDENT);
     }
 }
 

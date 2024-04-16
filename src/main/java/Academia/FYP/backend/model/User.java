@@ -1,6 +1,7 @@
 package Academia.FYP.backend.model;
 
 import Academia.FYP.backend.model.exam.Enrollment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,8 +43,8 @@ public class User implements UserDetails {
     private String email;
     private String phone;
     @Lob
-    @Column(length = 1000000)
-    private byte[] profilePic;
+    @Column(length = 5000)
+    private String profilePic;
     private boolean accountLocked;
     private boolean enabled;
 
@@ -58,6 +59,7 @@ public class User implements UserDetails {
 //    private LocalDateTime lastModifiedDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Enrollment> enrollments = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Token> token = new HashSet<>();
