@@ -1,12 +1,13 @@
-<h1 class="text-center">Students</h1>
-<div *ngIf="student.length > 0; else noStudents">
-  <table mat-table [dataSource]="student">
+<h1 class="text-center">Teachers</h1>
+
+<div *ngIf="teacher.length > 0; else noTeachers">
+  <table mat-table [dataSource]="teacher">
     <!-- Photo Column -->
     <ng-container matColumnDef="photo">
       <th mat-header-cell *matHeaderCellDef>Photo</th>
-      <td mat-cell *matCellDef="let student">
+      <td mat-cell *matCellDef="let teacher">
         <img
-          [src]="student.profilePic"
+          [src]="teacher.profilePic"
           alt="Profile Photo"
           width="50"
           height="50"
@@ -17,38 +18,38 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let student">
-        {{ student.firstName }} {{ student.lastName }}
+      <td mat-cell *matCellDef="let teacher">
+        {{ teacher.firstName }} {{ teacher.lastName }}
       </td>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let student">{{ student.email }}</td>
+      <td mat-cell *matCellDef="let teacher">{{ teacher.email }}</td>
     </ng-container>
 
     <!-- Username Column -->
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef>Username</th>
-      <td mat-cell *matCellDef="let student">{{ student.username }}</td>
+      <td mat-cell *matCellDef="let teacher">{{ teacher.username }}</td>
     </ng-container>
 
     <!-- Phone Column -->
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef>Phone</th>
-      <td mat-cell *matCellDef="let student">{{ student.phone }}</td>
+      <td mat-cell *matCellDef="let teacher">{{ teacher.phone }}</td>
     </ng-container>
 
-    <!-- Table Header Row -->
+    <!-- Define displayed columns in the order you want -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- Table Row -->
-    <tr mat-row *matRowDef="let student; columns: displayedColumns"></tr>
+    <tr mat-row *matRowDef="let teacher; columns: displayedColumns"></tr>
   </table>
 </div>
 
-<ng-template #noStudents>
+<!-- Template for no teachers found -->
+<ng-template #noTeachers>
   <div>
-    <p class="text-danger">No students found</p>
+    <p class="text-danger">No Teachers found</p>
   </div>
 </ng-template>

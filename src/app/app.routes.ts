@@ -31,6 +31,9 @@ import { StudentWelcomeComponentComponent } from './pages/user/student-welcome-c
 import { ViewStudentsComponent } from './pages/admin/view-students/view-students.component';
 import { TeacherWelcomeComponent } from './pages/user/teacher-welcome/teacher-welcome.component';
 import { TeacherViewQuizComponent } from './pages/user/teacher-view-quiz/teacher-view-quiz.component';
+import { ViewTeacherComponent } from './pages/admin/view-teacher/view-teacher.component';
+import { EnrollStudentComponent } from './pages/admin/enroll-student/enroll-student.component';
+import { EnrollTeacherComponent } from './pages/admin/enroll-teacher/enroll-teacher.component';
 
 export const routes: Routes = [
     {
@@ -117,6 +120,18 @@ export const routes: Routes = [
                 path: 'students',
                 component: ViewStudentsComponent,
             }
+            , {
+                path: 'teachers',
+                component: ViewTeacherComponent,
+            }
+            , {
+                path: 'enrollStudents',
+                component: EnrollStudentComponent,
+            }
+            , {
+                path: 'enrollTeachers',
+                component: EnrollTeacherComponent,
+            }
         ]
     },
     {
@@ -132,7 +147,6 @@ export const routes: Routes = [
             }, {
 
                 path: 'profile',
-
                 component: ProfileComponent
             }, {
                 path: 'quiz/:catid',

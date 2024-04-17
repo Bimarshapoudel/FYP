@@ -20,4 +20,11 @@ export class UserService {
     return this.http.get(url);
   }
 
+  public getStudents() {
+    return this.http.get(`${baseUrl}/user/students`)
+  }
+  public getTeachers() {
+    return this.http.get(`${baseUrl}/user/teachers`)
+  }
+
 }

@@ -1,0 +1,40 @@
+<h1 class="text-center">Enroll Students in Course</h1>
+
+<div class="container col-md-8 p-2">
+  <form action="">
+    <mat-form-field class="mt-3 w-50">
+      <mat-label>Category</mat-label>
+
+      <mat-select name="category" [(ngModel)]="categoryId">
+        @for (c of categories; track 1) {
+        <mat-option [value]="c.cid">{{ c.title }}</mat-option>
+        }@empty {
+        <div>No Course found</div>
+
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="mt-3 w-50 ps-2">
+      <mat-label>Students</mat-label>
+
+      <mat-select name="student" [(ngModel)]="userId">
+        @for (s of student; track student) {
+        <mat-option [value]="s.id"
+          >{{ s.firstName }} {{ s.lastName }}</mat-option
+        >
+        }@empty {
+        <div>No Students found</div>
+
+        }
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      type="submit"
+      [disabled]="!userId || !categoryId"
+      (click)="enrollUser()"
+    >
+      Enroll
+    </button>
+  </form>
+</div>
