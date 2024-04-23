@@ -19,7 +19,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ViewCategoriesComponent {
   categories = [{
-    id: '',
+    cid: '',
     title: '',
     description: ''
   }

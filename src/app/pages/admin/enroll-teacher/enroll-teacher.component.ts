@@ -70,10 +70,8 @@ export class EnrollTeacherComponent {
       error: (error: any) => {
         console.log(error);
         this.errorMessage = 'Student cannot be enrolled';
-      },
-      complete: () => {
-        console.log('Request Completed');
       }
-    });
+    }
+    );
   }
 }

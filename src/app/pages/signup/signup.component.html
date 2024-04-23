@@ -1,154 +1,136 @@
-<div class="container">
-  <div class="row mt-2">
-    <div class="col-md-6 offset-md-3">
-      <mat-card class="p-2">
-        <div class="d-lg-flex">
-          <img
-            src="../../../assets/logo.png"
-            class="rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5 img-fluid"
-            alt="Academia logo"
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <mat-card class="p-4">
+      <h1 class="text-center mb-4">Register Users</h1>
+
+      <form [formGroup]="signupForm" (ngSubmit)="formSubmit()">
+        <!-- Username field -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            formControlName="username"
+            placeholder="Username"
+            required
           />
-        </div>
-        <h1 class="text-center">Register Here</h1>
+          <mat-hint>Username must be unique</mat-hint>
+        </mat-form-field>
 
-        <form [formGroup]="signupForm">
-          <!-- username field -->
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Username</mat-label>
+        <!-- Password field -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </mat-form-field>
 
-            <input
-              required
-              formControlName="username"
-              name="username"
-              matInput
-              placeholder="Placeholder"
-            />
-            <mat-hint>Username must be unique</mat-hint>
-          </mat-form-field>
+        <!-- Confirm Password field -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            required
+          />
+        </mat-form-field>
 
-          <!-- password -->
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input
-              required
-              formControlName="password"
-              name="password"
-              type="password"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label> Confirm Password</mat-label>
-            <input
-              required
-              formControlName="confirmPassword"
-              name="password"
-              type="password"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-
-          <!-- firtsname -->
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>First Name</mat-label>
-            <input
-              required
-              formControlName="firstName"
-              name="firstName"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-
-          <!-- lastname -->
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Last Name</mat-label>
-            <input
-              required
-              formControlName="lastName"
-              name="lastName"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              required
-              formControlName="email"
-              name="email"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Profile Pic URL</mat-label>
-            <input
-              required
-              formControlName="profilePic"
-              name="profilePic"
-              matInput
-              placeholder="Enter Image Url"
-            />
-          </mat-form-field>
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="role" placeholder="Select Role">
-              <mat-option value="STUDENT">Student</mat-option>
-              <mat-option value="TEACHER">Teacher</mat-option>
-              <mat-option value="ADMIN">Admin</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <!-- email -->
-          <!-- <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              required
-              [(ngModel)]="user.email"
-              name="email"
-              type="email"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field> -->
-
-          <!-- phone -->
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Phone</mat-label>
-            <input
-              required
-              formControlName="phone"
-              name="phone"
-              type="number"
-              matInput
-              placeholder="Placeholder"
-            />
-          </mat-form-field>
-
-          <div class="container text-center">
-            <button
-              type="submit"
-              mat-raised-button
-              color="primary"
-              (click)="formSubmit()"
-              [disabled]="signupForm.invalid"
-            >
-              Register
-            </button>
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="clearForm()"
-              class="ms-2"
-            >
-              Clear
-            </button>
+        <!-- First Name and Last Name -->
+        <div class="row mb-3">
+          <div class="col">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                formControlName="firstName"
+                placeholder="First Name"
+                required
+              />
+            </mat-form-field>
           </div>
-        </form>
-      </mat-card>
-    </div>
+          <div class="col">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                formControlName="lastName"
+                placeholder="Last Name"
+                required
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Email field -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="Email"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Profile Pic URL -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Profile Pic URL</mat-label>
+          <input
+            matInput
+            formControlName="profilePic"
+            placeholder="Enter Image Url"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Role selection -->
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" placeholder="Select Role" required>
+            <mat-option value="STUDENT">Student</mat-option>
+            <mat-option value="TEACHER">Teacher</mat-option>
+            <mat-option value="ADMIN">Admin</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Phone field -->
+        <mat-form-field appearance="outline" class="w-100 mb-4">
+          <mat-label>Phone</mat-label>
+          <input
+            matInput
+            formControlName="phone"
+            type="tel"
+            placeholder="Phone"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Submit and Clear buttons -->
+        <div class="d-grid gap-2">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="signupForm.invalid"
+          >
+            Register
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            (click)="clearForm()"
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+    </mat-card>
   </div>
 </div>

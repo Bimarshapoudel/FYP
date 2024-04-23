@@ -22,4 +22,10 @@ export class CategoryService {
   getEnrolledCourses(userId: any) {
     return this.http.get(`${baseUrl}/enrollment/user/${userId}/categories`);
   }
+  public updateCategory(category: any) {
+    return this.http.put(`${baseUrl}/category/`, category)
+  }
+  public getCategory(cid: any) {
+    return this.http.get(`${baseUrl}/category/${cid}`)
+  }
 }

@@ -4,7 +4,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
-
 import { teacherGuardGuard } from './services/guard/TeacherGuard/teacher-guard.guard';
 import { StudentComponent } from './pages/user/student-dashboard/student/student.component';
 import { studentGuard } from './services/guard/StudentGuard/student.guard';
@@ -34,6 +33,7 @@ import { TeacherViewQuizComponent } from './pages/user/teacher-view-quiz/teacher
 import { ViewTeacherComponent } from './pages/admin/view-teacher/view-teacher.component';
 import { EnrollStudentComponent } from './pages/admin/enroll-student/enroll-student.component';
 import { EnrollTeacherComponent } from './pages/admin/enroll-teacher/enroll-teacher.component';
+import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
 
 export const routes: Routes = [
     {
@@ -41,10 +41,6 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'signup',
-        component: SignupComponent,
-        pathMatch: 'full',
-    }, {
         path: 'login',
         component: LoginComponent,
         pathMatch: 'full'
@@ -60,6 +56,10 @@ export const routes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent,
+            },
+            {
+                path: 'register',
+                component: SignupComponent,
             }, {
                 path: 'categories',
                 component: ViewCategoriesComponent
@@ -98,6 +98,11 @@ export const routes: Routes = [
                 path: 'quiz/:qid',
                 component: UpdateQuizComponent
 
+            },
+            {
+                path: 'categories/:cid',
+                component: UpdateCategoryComponent
+
             }, {
                 path: 'add-question/:qId/:qTitle',
                 component: AddQuestionComponent
@@ -133,27 +138,6 @@ export const routes: Routes = [
                 component: EnrollTeacherComponent,
             }
         ]
-    },
-    {
-        path: 'teacher',
-        component: UserDashboardComponent,
-        pathMatch: 'full',
-        canActivate: [teacherGuardGuard],
-        children: [
-            {
-                path: '',
-                component: TeacherWelcomeComponent
-
-            }, {
-
-                path: 'profile',
-                component: ProfileComponent
-            }, {
-                path: 'quiz/:catid',
-                component: TeacherViewQuizComponent
-            }]
-
-
     },
     {
         path: 'student',
@@ -197,5 +181,28 @@ export const routes: Routes = [
     {
         path: 'activate-account',
         component: ConfirmEmailComponent
+    }
+    ,
+    {
+        path: 'teacher',
+        component: UserDashboardComponent,
+        pathMatch: 'full',
+        canActivate: [teacherGuardGuard],
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                component: TeacherWelcomeComponent
+
+            }, {
+
+                path: 'profile',
+                component: ProfileComponent
+            }, {
+                path: 'quiz/:catid',
+                component: TeacherViewQuizComponent
+            }]
+
+
     }
 ];

@@ -1,55 +1,42 @@
-<h1 class="text-center">Teachers</h1>
+<div class="container">
+  <h1 class="text-center">Teachers</h1>
 
-<div *ngIf="teacher.length > 0; else noTeachers">
-  <table mat-table [dataSource]="teacher">
-    <!-- Photo Column -->
-    <ng-container matColumnDef="photo">
-      <th mat-header-cell *matHeaderCellDef>Photo</th>
-      <td mat-cell *matCellDef="let teacher">
-        <img
-          [src]="teacher.profilePic"
-          alt="Profile Photo"
-          width="50"
-          height="50"
-        />
-      </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let teacher">
-        {{ teacher.firstName }} {{ teacher.lastName }}
-      </td>
-    </ng-container>
-
-    <!-- Email Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let teacher">{{ teacher.email }}</td>
-    </ng-container>
-
-    <!-- Username Column -->
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef>Username</th>
-      <td mat-cell *matCellDef="let teacher">{{ teacher.username }}</td>
-    </ng-container>
-
-    <!-- Phone Column -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef>Phone</th>
-      <td mat-cell *matCellDef="let teacher">{{ teacher.phone }}</td>
-    </ng-container>
-
-    <!-- Define displayed columns in the order you want -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let teacher; columns: displayedColumns"></tr>
-  </table>
-</div>
-
-<!-- Template for no teachers found -->
-<ng-template #noTeachers>
-  <div>
-    <p class="text-danger">No Teachers found</p>
+  <div *ngIf="teacher.length > 0; else noStudents">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of teacher">
+            <td>
+              <img
+                [src]="s.profilePic"
+                alt="Profile Photo"
+                width="50"
+                height="50"
+                class="rounded-circle"
+              />
+            </td>
+            <td>{{ s.firstName }} {{ s.lastName }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.username }}</td>
+            <td>{{ s.phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</ng-template>
+
+  <ng-template #noStudents>
+    <div class="alert alert-danger text-center">
+      <p>No teachers found</p>
+    </div>
+  </ng-template>
+</div>

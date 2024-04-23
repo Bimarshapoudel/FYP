@@ -32,7 +32,7 @@ export class SignupComponent {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       firstName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       profilePic: ['', Validators.required],
       role: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -56,7 +56,7 @@ export class SignupComponent {
         console.log(res);
         if (res != null) {
           Swal.fire('Success', 'User success registered', 'success');
-          this.router.navigateByUrl("/login")
+          this.signupForm.reset();
         }
         else {
           alert('error');

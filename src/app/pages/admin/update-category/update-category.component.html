@@ -1,0 +1,40 @@
+<mat-card>
+  <h1>Update category</h1>
+  <mat-card-content>
+    <div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <form *ngIf="category">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Title</mat-label>
+              <input
+                [(ngModel)]="category.title"
+                required
+                autofocus
+                type="text"
+                name="title"
+                matInput
+                placeholder="Enter Title"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea
+                [(ngModel)]="category.description"
+                name="description"
+                matInput
+                placeholder="Enter Category Description Here"
+                rows="15"
+              ></textarea>
+            </mat-form-field>
+            <div class="container text-center mt-2">
+              <button mat-raised-button color="primary" (click)="updateData()">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
