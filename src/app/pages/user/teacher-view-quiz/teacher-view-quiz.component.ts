@@ -63,4 +63,26 @@ export class TeacherViewQuizComponent {
       }
     })
   };
+  deleteQuiz(qid: any) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Are you sure?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete
+        this._quiz.deleteQuiz(qid).subscribe({
+          next: (data: any) => {
+
+            this.quizzes = this.quizzes.filter((quiz) => quiz.qid != qid)
+            Swal.fire('Success', 'Quiz deleted', 'success');
+          }, error(error: any) {
+            Swal.fire('Error', 'Error in deleting Quiz', 'error');
+          }
+        });
+      }
+    })
+
+  }
 }

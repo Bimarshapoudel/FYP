@@ -59,7 +59,7 @@ export class AddLessonComponent {
     // call server
     this._lesson.addlesson(this.lessonData).subscribe({
       next: (data: any) => {
-        Swal.fire('Success', 'Quiz is added successfully', 'success')
+        Swal.fire('Success', 'Lesson added successfully', 'success')
         this.lessonData = {
           title: '',
           description: '',
@@ -69,7 +69,7 @@ export class AddLessonComponent {
         };
 
       }, error: (error: any) => {
-        Swal.fire('Error', 'Quiz is not added', 'error')
+        Swal.fire('Error', 'Lesson is not added', 'error')
       }
     })
 

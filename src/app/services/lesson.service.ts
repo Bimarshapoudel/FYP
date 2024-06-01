@@ -28,7 +28,7 @@ export class LessonService {
   public updateLessson(lesson: any) {
     return this.http.put(`${baseUrl}/lesson/`, lesson)
   }
-  public getLessonOfCategory(cid: any) {
+  public getLessonOfCategory(cid: number) {
     return this.http.get(`${baseUrl}/lesson/category/${cid}`)
   }
 }

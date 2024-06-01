@@ -33,7 +33,7 @@ export class SignupComponent {
       confirmPassword: ['', [Validators.required]],
       firstName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      profilePic: ['', Validators.required],
+
       role: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', [Validators.pattern(/^\d{10}$/)]]

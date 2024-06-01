@@ -1,38 +1,45 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 mt-2">
-      @for(q of quiz;track quiz){
-      <mat-card>
-        <mat-card-header>
-          <!-- header -->
-          <mat-card-title>
-            Read the instructions of the page carefully
-          </mat-card-title>
-          <mat-card-subtitle> One step more to go </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <!-- conent -->
+      <!-- Display quizzes using ngFor -->
+      <ng-container *ngFor="let q of quiz; let i = index">
+        <mat-card>
+          <mat-card-header>
+            <!-- Quiz header -->
+            <mat-card-title>{{ q.title }}</mat-card-title>
+            <mat-card-subtitle>{{ q.description }}</mat-card-subtitle>
+          </mat-card-header>
 
-          <h1>{{ q.title }}</h1>
-          <p>{{ q.description }}</p>
+          <mat-card-content>
+            <!-- Quiz instructions -->
+            <h1>Instructions</h1>
+            <p>
+              Please read the following instructions carefully before starting
+              the quiz:
+            </p>
+            <ul>
+              <li>Ensure you have a stable internet connection.</li>
+              <li>Complete the quiz within the allocated time limit.</li>
+              <li>Answer all questions to the best of your ability.</li>
+              <li>Click the "Start Quiz" button to begin.</li>
+            </ul>
+          </mat-card-content>
 
-          <mat-divider></mat-divider>
-          <br />
-          <h1>Important Instructions</h1>
-          <ul>
-            <li>Instructions go here</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions>
-          <!-- actions -->
-          <div class="container text-center">
-            <button mat-raised-button color="primary" (click)="startQuiz()">
-              Start Quiz
-            </button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
-      } @empty { No quiz found }
+          <mat-card-actions>
+            <!-- Start Quiz button -->
+            <div class="container text-center">
+              <button mat-raised-button color="primary" (click)="startQuiz()">
+                Start Quiz
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+
+      <!-- Display message if no quizzes are found -->
+      <div *ngIf="quiz.length === 0">
+        <p class="text-muted">No quiz found.</p>
+      </div>
     </div>
   </div>
 </div>

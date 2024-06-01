@@ -13,7 +13,7 @@
     <button
       mat-raised-button
       color="primary"
-      [routerLink]="'/admin/view-questions/' + q.qid + '/' + q.title"
+      [routerLink]="'/teacher/view-questions/' + q.qid + '/' + q.title"
     >
       Questions
     </button>
@@ -23,22 +23,29 @@
     <button mat-stroked-button color="primary" class="ms-2">
       Questions: {{ q.numberOfQuestions }}
     </button>
-    <button
+    <!-- <button
       mat-flat-button
       color="primary"
-      [routerLink]="'/admin/quiz/' + q.qid"
+      [routerLink]="'/teacher/quiz/' + q.qid"
       class="ms-2"
     >
       Update
-    </button>
-    <button mat-flat-button color="warn" class="ms-2">Delete</button>
+    </button> -->
+    <!-- <button
+      mat-flat-button
+      color="warn"
+      class="ms-2"
+      (click)="deleteQuiz(q.qid)"
+    >
+      Delete
+    </button> -->
   </mat-card-actions>
 </mat-card>
 }@empty {
 <div>No Quiz found</div>
 }
 <div class="container text-center mt-3">
-  <button routerLink="/admin/add-quiz" mat-raised-button color="primary">
+  <button routerLink="/teacher/add-quiz" mat-raised-button color="primary">
     Add New Quiz
   </button>
 </div>

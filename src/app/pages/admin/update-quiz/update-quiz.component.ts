@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CategoryService } from '../../../services/category.service';
-import { keyframes } from '@angular/animations';
+
 import Swal from 'sweetalert2';
 
 @Component({

@@ -1,18 +1,16 @@
-<mat-card *ngIf="user">
-  <h1>Your profile details</h1>
-  <!-- {{ user | json }} -->
+<mat-card *ngIf="user" class="profile-card">
+  <h1 class="text-center mb-4">Your Profile Details</h1>
+
   <mat-card-content>
     <div class="container">
-      <div class="conatiner text-center">
+      <div class="text-center mb-4">
         <ng-container *ngIf="user.profilePic">
-          <!-- Display user's profile pic -->
           <img
             [src]="user.profilePic"
             alt="Profile Picture"
             class="profile-image"
           />
         </ng-container>
-        <!-- If user profilePic is empty or undefined, display a placeholder image -->
         <ng-container *ngIf="!user.profilePic">
           <img
             src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
@@ -20,40 +18,82 @@
             class="profile-image"
           />
         </ng-container>
-        <h1 class="mt-2 fw-bold">{{ user.firstName }} {{ user.lastName }}</h1>
+        <h1 class="mt-3 fw-bold">{{ user.firstName }} {{ user.lastName }}</h1>
       </div>
-      <div class="row">
-        <div class="col-md-10 offset-md-1">
-          <table class="table table-hover border text-center">
-            <tr>
-              <td class="ps-3 pt-2 pb-2">Username</td>
-              <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-              <td class="ps-3 pt-2 pb-2">Userid</td>
-              <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-              <td class="ps-3 pt-2 pb-2">Phone</td>
-              <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-              <td class="ps-3 pt-2 pb-2">Role</td>
-              <td>{{ user.role }}</td>
-            </tr>
-            <tr>
-              <td class="ps-3 pt-2 pb-2">Status</td>
-              <td>{{ user.enabled ? "Active" : "Inactive" }}</td>
-            </tr>
+
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <table class="table table-bordered text-center">
+            <tbody>
+              <tr>
+                <td class="fw-bold">Username</td>
+                <td>{{ user.username }}</td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Phone</td>
+                <td>{{ user.phone }}</td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Role</td>
+                <td>{{ user.role }}</td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Status</td>
+                <td>{{ user.enabled ? "Active" : "Inactive" }}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
     </div>
   </mat-card-content>
-  <div class="d-flex justify-content-center">
-    <mat-card-actions>
-      <button class="me-3" mat-raised-button color="primary">UPDATE</button>
-      <button mat-raised-button color="accent">SHARE</button>
-    </mat-card-actions>
+
+  <div class="d-flex justify-content-center mt-3">
+    <button
+      mat-raised-button
+      (click)="openCommentBox()"
+      color="primary"
+      class="me-3"
+    >
+      Change Password
+    </button>
+  </div>
+</mat-card>
+<mat-card class="p-2" class="profile-card">
+  <div *ngIf="showCommentBox" class="mt-3">
+    <h2>New Password</h2>
+
+    <form (ngSubmit)="onChangePassword()">
+      <mat-form-field class="w-100" appearance="outline">
+        <input
+          matInput
+          type="password"
+          placeholder="New Password"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+          required
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="w-100" appearance="outline">
+        <input
+          matInput
+          type="password"
+          placeholder="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          name="newPassword"
+          required
+        />
+      </mat-form-field>
+      <br />
+      <button
+        mat-raised-button
+        [disabled]="!newPassword || !confirmPassword"
+        color="warn"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
   </div>
 </mat-card>

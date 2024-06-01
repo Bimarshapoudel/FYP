@@ -27,4 +27,9 @@ export class UserService {
     return this.http.get(`${baseUrl}/user/teachers`)
   }
 
+  changePassword(userId: number, newPassword: string): Observable<any> {
+    const url = `${baseUrl}/user/${userId}/change-password?newPassword=${newPassword}`;
+    return this.http.put(url, {});
+  }
+
 }

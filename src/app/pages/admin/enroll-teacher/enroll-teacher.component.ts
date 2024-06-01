@@ -19,16 +19,14 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './enroll-teacher.component.css'
 })
 export class EnrollTeacherComponent {
-  categories = [{
-    cid: 0,
-    title: ''
-  }
-  ];
+  categories: any[] = [];
   teacher = [{
     id: 0,
     firstName: '',
     lastName: ''
   }]
+  teachers: any[] = [];
+  categoryName: any;
   userId!: number;
   categoryId!: number;
   errorMessage: string = '';
@@ -72,6 +70,20 @@ export class EnrollTeacherComponent {
         this.errorMessage = 'Student cannot be enrolled';
       }
     }
+    );
+  }
+  showTeachers() {
+    console.log('show teachers')
+    console.log(this.categoryName)
+    this.enrollmentService.getTeacherByCategory(this.categoryName).subscribe(
+      data => {
+        this.teachers = data;
+        console.log(this.teachers)
+
+      },
+      error => {
+        console.log('Error fetching enrolled students:', error);
+      }
     );
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
-import { catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -35,5 +35,10 @@ export class StudyMaterialService {
   }
   public DeleteStudyMaerial(sid: any) {
     return this._http.delete(`${baseUrl}/study/${sid}`)
+  }
+  downloadFile(id: number): Observable<Blob> {
+    return this._http.get(`${baseUrl}/study/download/${id}`, {
+      responseType: 'blob'
+    });
   }
 }

@@ -9,11 +9,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import Swal from 'sweetalert2';
 import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatIconModule, ReactiveFormsModule, FormsModule],
+  imports: [HttpClientModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatIconModule, ReactiveFormsModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -65,17 +66,21 @@ export class LoginComponent {
             else {
               this.login.logout();
             }
-          }, error: error => {
-            console.error(error, 'sddsc');
-
-            Swal.fire('Error', "Invalid username or password", 'error');
+          }, error: (error: any) => {
+            if (error.status === 401) {
+              Swal.fire('Error', 'Unauthorized access. Please check your credentials.', 'error');
+            } else {
+              Swal.fire('Error', 'An unexpected error occurred. Please try again later.', 'error');
+            }
           }
         })
       },
       error: (error: any) => {
-        console.error(error);
-
-        Swal.fire('Error', "Invalid username or password", 'error');
+        if (error.status === 401) {
+          Swal.fire('Error', 'Unauthorized access. Please check your credentials.', 'error');
+        } else {
+          Swal.fire('Error', 'An unexpected error occurred. Please try again later.', 'error');
+        }
       }
     }
 

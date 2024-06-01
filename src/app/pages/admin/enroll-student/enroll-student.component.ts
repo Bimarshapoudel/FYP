@@ -20,16 +20,20 @@ import { catchError, finalize } from 'rxjs';
   styleUrl: './enroll-student.component.css'
 })
 export class EnrollStudentComponent {
-  categories = [{
-    cid: 0,
-    title: ''
-  }
-  ];
+  // categories = [{
+  //   cid: 0,
+  //   title: ''
+  // }
+  // ];
+  selectedCategory: string = '';
   student = [{
     id: 0,
     firstName: '',
     lastName: ''
   }]
+  categories: any[] = [];
+  students: any[] = [];
+  categoryName: any;
   userId!: number;
   categoryId!: number;
   errorMessage: string = '';
@@ -76,6 +80,29 @@ export class EnrollStudentComponent {
         console.log('Request Completed');
       }
     });
+
+  }
+
+  // onCategoryChange(categoryName: string | null): void {
+  //   if (categoryName !== null) {
+  //     this.selectedCategory = categoryName;
+  //     this.fetchStudents();
+  //   }
+  // }
+  showStudents() {
+    console.log('show stuednts')
+    console.log(this.categoryName)
+    this.enrollmentService.getStudentsByCategory(this.categoryName).subscribe(
+      data => {
+        this.students = data;
+        console.log(this.students)
+
+      },
+      error => {
+        console.log('Error fetching enrolled students:', error);
+      }
+    );
   }
 }
+
 

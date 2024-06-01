@@ -34,6 +34,16 @@ import { ViewTeacherComponent } from './pages/admin/view-teacher/view-teacher.co
 import { EnrollStudentComponent } from './pages/admin/enroll-student/enroll-student.component';
 import { EnrollTeacherComponent } from './pages/admin/enroll-teacher/enroll-teacher.component';
 import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { StudentViewLessonComponent } from './pages/user/student-view-lesson/student-view-lesson.component';
+import { StudentViewStudyMaterialComponent } from './pages/user/student-view-study-material/student-view-study-material.component';
+import { TeacherAddQuizComponent } from './pages/user/teacher-add-quiz/teacher-add-quiz.component';
+import { TeacherViewLessonsComponent } from './pages/user/teacher-view-lessons/teacher-view-lessons.component';
+import { TeacherAddLessonsComponent } from './pages/user/teacher-add-lessons/teacher-add-lessons.component';
+import { TeacherUpdateLessonsComponent } from './pages/user/teacher-update-lessons/teacher-update-lessons.component';
+import { TeacherViewStudyMaterialComponent } from './pages/user/teacher-view-study-material/teacher-view-study-material.component';
+import { TeacherAddStudyMaterialComponent } from './pages/user/teacher-add-study-material/teacher-add-study-material.component';
+import { TeacherAddQuestionsComponent } from './pages/user/teacher-add-questions/teacher-add-questions.component';
+import { TeacherViewQuestionsComponent } from './pages/user/teacher-view-questions/teacher-view-questions.component';
 
 export const routes: Routes = [
     {
@@ -104,7 +114,7 @@ export const routes: Routes = [
                 component: UpdateCategoryComponent
 
             }, {
-                path: 'add-question/:qId/:qTitle',
+                path: 'add-question/:qid/:title',
                 component: AddQuestionComponent
             },
             {
@@ -154,6 +164,14 @@ export const routes: Routes = [
                 path: ':catid',
                 component: StudentLoadQuizComponent
             },
+            {
+                path: 'lesson/:catid',
+                component: StudentViewLessonComponent
+            },
+            {
+                path: 'view-studyMaterial/:lid/:title',
+                component: StudentViewStudyMaterialComponent
+            },
 
 
             {
@@ -186,12 +204,10 @@ export const routes: Routes = [
     {
         path: 'teacher',
         component: UserDashboardComponent,
-        pathMatch: 'full',
         canActivate: [teacherGuardGuard],
         children: [
             {
                 path: '',
-                pathMatch: 'full',
                 component: TeacherWelcomeComponent
 
             }, {
@@ -201,7 +217,39 @@ export const routes: Routes = [
             }, {
                 path: 'quiz/:catid',
                 component: TeacherViewQuizComponent
-            }]
+            }, {
+                path: 'add-quiz',
+                component: TeacherAddQuizComponent
+
+            },
+
+            {
+                path: 'lesson/:catid',
+                component: TeacherViewLessonsComponent
+            },
+            {
+                path: 'add-lesson',
+                component: TeacherAddLessonsComponent
+
+            },
+            {
+                path: 'lesson/:lid',
+                component: TeacherUpdateLessonsComponent
+
+            }, {
+                path: 'view-studyMaterial/:lid/:title',
+                component: TeacherViewStudyMaterialComponent
+            }, {
+                path: 'add-studyMaterial/:lid',
+                component: TeacherAddStudyMaterialComponent
+            }, {
+                path: 'add-question/:qid/:title',
+                component: TeacherAddQuestionsComponent
+            }, {
+                path: 'view-questions/:qid/:title',
+                component: TeacherViewQuestionsComponent
+            }
+        ]
 
 
     }

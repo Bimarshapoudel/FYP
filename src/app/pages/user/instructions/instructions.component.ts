@@ -5,11 +5,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-instructions',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatDividerModule, RouterModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, RouterModule],
   templateUrl: './instructions.component.html',
   styleUrl: './instructions.component.css'
 })

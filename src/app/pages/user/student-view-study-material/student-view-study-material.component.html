@@ -1,0 +1,16 @@
+<h3>Lesson : {{ title }}</h3>
+
+@for(s of studyMaterial;track 1){
+<mat-card class="p-2 mt-2 ms-2 me-2">
+  <mat-card-content>
+    <p>Description: {{ s.description }}</p>
+    <p>File Name: {{ s.title }}</p>
+
+    <button type="button" class="btn btn-primary" (click)="downloadFile(s.id)">
+      Download {{ s.filePath.split("/").pop() }}
+    </button>
+  </mat-card-content>
+</mat-card>
+}@empty {
+<div class="text-danger">No Study material found found</div>
+}

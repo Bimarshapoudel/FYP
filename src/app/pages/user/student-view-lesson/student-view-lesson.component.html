@@ -1,0 +1,24 @@
+@for(l of lessons;track lessons ){
+<mat-card class="p-2 mt-2 ms-2 me-2">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ l.title }}</mat-card-title>
+    <mat-card-subtitle>{{ l.category.title }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ l.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="'/student/view-studyMaterial/' + l.lid + '/' + l.title"
+    >
+      Study Material
+    </button>
+  </mat-card-actions>
+</mat-card>
+}@empty {
+<div>No Lessons found</div>
+}

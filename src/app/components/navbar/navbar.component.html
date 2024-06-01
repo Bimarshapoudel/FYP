@@ -8,9 +8,7 @@
   <a routerLink="/login" *ngIf="!isLoggedIn">
     <button mat-raised-button class="me-2" color="accent">Login</button></a
   >
-  <a [routerLink]="'/signup'" *ngIf="!isLoggedIn">
-    <button mat-raised-button color="accent">Register</button>
-  </a>
+
   <div class="d-flex" *ngIf="isLoggedIn && login.loginStatusSubject">
     <p *ngIf="user" routerLink="/admin/profile" class="me-3 mt-2">
       {{ user.username }}
