@@ -60,5 +60,16 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .map(enrollment -> enrollment.getCategory())
                 .collect(Collectors.toList());
     }
-
+    @Override
+    public List<Enrollment> getAllEnrollments() {
+        return enrollmentRepository.findAll();
+    }
+    @Override
+    public List<User> getStudentsByCategory(String categoryName) {
+        return enrollmentRepository.findStudentsByCategoryName(categoryName);
+    }
+    @Override
+    public List<User> getTeacherByCategory(String categoryName) {
+        return enrollmentRepository.findTeacherByCategoryName(categoryName);
+    }
 }

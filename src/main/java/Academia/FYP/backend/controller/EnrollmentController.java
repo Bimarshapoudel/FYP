@@ -1,6 +1,8 @@
 package Academia.FYP.backend.controller;
 
+import Academia.FYP.backend.model.User;
 import Academia.FYP.backend.model.exam.Category;
+import Academia.FYP.backend.model.exam.Enrollment;
 import Academia.FYP.backend.service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +49,18 @@ public class EnrollmentController {
     public ResponseEntity<List<Category>> getCategoriesByUserEnrollment(@PathVariable Integer userId) {
         List<Category> categories = enrollmentService.getCategoriesByUserEnrollment(userId);
         return ResponseEntity.ok(categories);
+    }
+    @GetMapping("/")
+    public List<Enrollment> getAllEnrollments() {
+        return enrollmentService.getAllEnrollments();
+    }
+
+    @GetMapping("/students")
+    public List<User> getStudentsByCategory(@RequestParam String categoryName) {
+        return enrollmentService.getStudentsByCategory(categoryName);
+    }
+    @GetMapping("/teachers")
+    public List<User> getTeacherByCategory(@RequestParam String categoryName) {
+        return enrollmentService.getTeacherByCategory(categoryName);
     }
 }

@@ -42,8 +42,8 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String phone;
-    @Lob
-    @Column(length = 5000)
+//    @Lob
+//    @Column(length = 5000)
     private String profilePic;
     private boolean accountLocked;
     private boolean enabled;

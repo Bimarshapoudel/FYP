@@ -19,4 +19,7 @@ public interface UserService {
     public User updateUser(User user,Integer userId) throws Exception;
     public List<User> getTeacher(Role role);
     public List<User> getStudent(Role role);
+
+    User getUser(Integer id);
+    User updateUserPassword(Integer userId, String newPassword);
 }

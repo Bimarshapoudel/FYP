@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.logging.log4j.util.StringBuilders.equalsIgnoreCase;
 
 
 @Component

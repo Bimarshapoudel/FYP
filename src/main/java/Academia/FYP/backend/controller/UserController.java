@@ -47,4 +47,14 @@ public class UserController {
     public List<User> getAllStudents() {
         return userService.getStudent(Role.STUDENT);
     }
+
+    @PutMapping("/{userId}/change-password")
+    public ResponseEntity<String> changePassword(@PathVariable Integer userId, @RequestParam String newPassword) {
+        User updatedUser = userService.updateUserPassword(userId, newPassword);
+        if (updatedUser != null) {
+            return ResponseEntity.ok("Password changed successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
 }

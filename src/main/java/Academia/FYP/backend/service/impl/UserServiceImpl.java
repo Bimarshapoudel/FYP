@@ -152,5 +152,20 @@ public class UserServiceImpl implements UserService {
     public List<User> getStudent(Role role){
         return userRepository.findByRole(Role.STUDENT);
     }
+
+    @Override
+    public User getUser(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User updateUserPassword(Integer userId, String newPassword) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }
 
